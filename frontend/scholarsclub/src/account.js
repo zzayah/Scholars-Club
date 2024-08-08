@@ -18,13 +18,15 @@ function Account() {
         }).then((res) => res.json()).then((data => {
             console.log(data);
             document.getElementById("username").innerHTML = data.userName;      
-            document.getElementById("bio").innerHTML = data.bio;        
+            document.getElementById("bio").innerHTML = data.bio;      
+            document.getElementById("pfp").src = data.pfp;  
         }));
     }
 
   return (
     <div>
       <Navbar />
+      <img id="pfp" src=""></img>
       <h1 id="username">USERNAME HERE!!!</h1>
       <h3 id="bio">BIO HERE!!!</h3>
     </div>
