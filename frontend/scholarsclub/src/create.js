@@ -4,6 +4,7 @@ import './create.css'
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { FiAlignJustify } from "react-icons/fi";
+import { FiPhone } from "react-icons/fi";
 
 
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -84,6 +85,11 @@ export default function Create(){
                     <label><br></br></label>
                     <label>
                         <textarea name="bio" placeholder='Enter bio here'/> <FiAlignJustify class="icon"/>
+                    </label>
+                    <label><br></br></label>
+
+                    <label>
+                        <input name="pfp" placeholder='Enter profile photo URL here'/> <FiPhone class="icon"/>
                     </label>
                     <label><br></br></label>
 
