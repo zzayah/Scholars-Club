@@ -23,14 +23,16 @@ function Account() {
         }));
     }
 
-  return (
+    return (
     <div>
-      <Navbar />
-      <img id="pfp" src=""></img>
-      <h1 id="username">USERNAME HERE!!!</h1>
-      <h3 id="bio">BIO HERE!!!</h3>
+        <Navbar />
+        <div id="userinfo">
+            <img id="pfp" src=""></img>
+            <h1 id="username">USERNAME HERE!!!</h1>
+            <h3 id="bio">BIO HERE!!!</h3>
+        </div>
     </div>
-  );
+    );
 }
 
 export default Account;

@@ -16,7 +16,7 @@ const client = new MongoClient(uri, {
 
 // Collections
 var users;
-
+var threads;
 
 /*
     Init database connection
@@ -27,6 +27,7 @@ exports.dbInit = function () {
         client.connect();
         client.db("admin").command({ ping: 1 });
         users = client.db("accountdata").collection("accountdata");
+        threads = client.db("threads").collection("threads");
         console.log("[DBMAN] Database connection initilized.")
     // } catch {
     //     console.log("[DBMAN] Error connecting to MongoDB");
@@ -59,6 +60,28 @@ exports.addUser = function(user){
     users.insertOne(user, errorHandle);
 }
 
+/*
+    Create new thread
+*/
+exports.createThread = function(thread){
+    threads.insertOne(thread, errorHandle);
+}
+
+/*
+    Get all threads
+*/
+exports.getThreads = function(){
+    return threads.find().toArray();
+}
+
+/*
+    Get thread by id
+*/
+exports.getThreadByID = function(Tid){
+    const query = {id : Tid};
+    const data = threads.findOne(query);
+    return data; 
+}
 
 function errorHandle(err, res){
     if (err) throw err;
