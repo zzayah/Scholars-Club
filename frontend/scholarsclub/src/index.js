@@ -7,6 +7,9 @@ import Login from './login'
 import Account, {
   loader as accLoad,
 } from "./account";
+import Thread, {
+  loader as threadLoad,
+} from "./thread";
 import reportWebVitals from './reportWebVitals';
 
 import {
@@ -35,6 +38,11 @@ const router = createBrowserRouter([
     path: '/account/:username',
     element: <Account />,
     loader: accLoad
+  },
+  {
+    path: '/threads/:tid',
+    element: <Thread />,
+    loader: threadLoad
   }
 ]);
 
