@@ -151,3 +151,51 @@ app.post('/acc/iddata', (req, res) => {
     })
     
 });
+
+app.post('/acc/undata', (req, res) => {
+    dbMan.getUser(req.body.username).then((data) => {
+        console.log(data);
+        return res.json(data);
+    })
+    
+});
+
+
+/*
+    Thread stuff
+*/
+app.post('/thread/create', (req, res) => {
+    const title = req.body.title;
+    const userID = req.body.userID;
+    let threadID = '';
+    for(i=0; i<19; ++i) threadID += Math.floor(Math.random() * 10);
+    console.log(threadID);
+
+    dbMan.createThread({
+        id: threadID,
+        title: title,
+        userID: userID,
+        replies:  []
+    });
+
+    res.json({
+        message: "Thread created!",
+        threads: dbMan.getThreads()
+    });
+    
+});
+
+app.post('/thread/get', (req, res) => {
+    dbMan.getThreadByID(req.body.id).then((data) => {
+        return res.json(data);
+    });
+});
+
+app.post('/thread/getthreads', (req, res) => {
+    console.log("req!");
+    dbMan.getThreads().then((data) => {
+        return res.json(data);
+    });
+    // console.log(dbMan.getThreads());
+    // return res.json(dbMan.getThreads());
+});

@@ -4,7 +4,9 @@ import './index.css';
 import Create from './create';
 import App from './App';
 import Login from './login'
-import Account from "./account"
+import Account, {
+  loader as accLoad,
+} from "./account";
 import reportWebVitals from './reportWebVitals';
 
 import {
@@ -25,9 +27,14 @@ const router = createBrowserRouter([
     path: '/login',
     element: <Login />,
   },
+  // {
+  //   path: '/account',
+  //   element: <Account />,
+  // },
   {
-    path: '/account',
+    path: '/account/:username',
     element: <Account />,
+    loader: accLoad
   }
 ]);
 

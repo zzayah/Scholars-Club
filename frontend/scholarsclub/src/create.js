@@ -37,7 +37,7 @@ export default function Create(){
             }else{
                 alert("Account created!");
                 localStorage.setItem("_id", data.id);
-                navigate("/account");
+                navigate("/account/"+formJson["username"]);
             }
         }))
         // .then(response => {
