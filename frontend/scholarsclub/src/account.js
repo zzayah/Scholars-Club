@@ -67,7 +67,7 @@ function Account() {
         We'll add account editing stuff here later
       </div>
     </div>
-  );
+    );
 }
 
 export default Account;
