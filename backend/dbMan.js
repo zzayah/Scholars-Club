@@ -86,3 +86,16 @@ exports.getThreadByID = function(Tid){
 function errorHandle(err, res){
     if (err) throw err;
 };
+
+
+exports.addReplyToThread = function(tid, reply){
+    const query = {id: tid};
+    const update = { 
+        $push:
+        {
+            replies: reply
+        }
+    };
+    threads.updateOne(query, update);
+
+}

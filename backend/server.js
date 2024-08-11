@@ -199,3 +199,28 @@ app.post('/thread/getthreads', (req, res) => {
     // console.log(dbMan.getThreads());
     // return res.json(dbMan.getThreads());
 });
+
+app.post('/thread/getreplies', (req, res) => {
+    console.log("req!");
+    dbMan.getThreadByID(req.body.id).then((data) => {
+        return res.json(data);
+    });
+    // console.log(dbMan.getThreads());
+    // return res.json(dbMan.getThreads());
+});
+
+
+app.post('/thread/reply', (req, res) => {
+    console.log("Reply!");
+    const tid = req.body.tid;
+    const body = req.body.text;
+    const uid  = req.body.userID;
+    let replyID = '';
+    for(i=0; i<19; ++i) replyID += Math.floor(Math.random() * 10);
+    console.log(replyID);
+    dbMan.addReplyToThread(tid, {
+        body: body,
+        uid: uid,
+        replyID: replyID
+    });
+});

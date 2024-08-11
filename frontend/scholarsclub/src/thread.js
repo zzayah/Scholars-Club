@@ -19,7 +19,7 @@ function Thread() {
 
   const tid = useLoaderData();
 
-  function getUserName(tid, id){
+  function getUserName(tid, id, updateOne, updateTwo){
     console.log(id);
     fetch("http://localhost:8080/acc/iddata", {
         headers: {
@@ -29,8 +29,12 @@ function Thread() {
         body: JSON.stringify({id: id})
     }).then((res) => res.json()).then((data => {
         console.log(data.userName);
-        document.getElementById("USER"+tid).innerHTML = "Created by " + data.userName;
-        document.getElementById("ULINK"+tid).href = "http://localhost:3000/account/"+data.userName;
+        document.getElementById(updateOne).innerHTML = "From " + data.userName;
+        document.getElementById(updateTwo).href = "http://localhost:3000/account/"+data.userName;
+        let img = document.getElementById(updateOne+"IMG");
+        if(img){
+          img.src = data.pfp;
+        }
         return data.userName;
     }));
   }
@@ -42,46 +46,56 @@ function Thread() {
         headers: {
           "Content-Type": "application/json",
         },
-        method: "POST"
+        method: "POST",
+        body: JSON.stringify({id: tid})
       });
       console.log(res);
       const data = await res.json();
-      setReplies(data);
+      console.log(data);
+      getUserName(tid, data.userID, "authorname", "authorlink");
+      document.getElementById("threadtitle").innerHTML = data.title;
+      setReplies(data.replies);
     }
 
     getReplies();
   }, []);
 
   function replyThread(){
-    // let title = prompt("Title of post?");
-    // if(title){
-    //   fetch("http://localhost:8080/thread/replu", {
-    //     headers: {
-    //         "Content-Type": "application/json",
-    //     },
-    //     method: "POST",
-    //     body: JSON.stringify({
-    //       title: title,
-    //       userID: localStorage.getItem("_id"),
-        
-    //     })
-    //   }).then((res) => res.json()).then((data => {
-    //     // navigate("/");
-        
-    //   }))
-    // }
+    let body = prompt("Enter your reply here:");
+    if(body){
+      fetch("http://localhost:8080/thread/reply", {
+        headers: {
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          tid: tid,
+          text: body,
+          userID: localStorage.getItem("_id")
+        })
+      }).then((res) => res.json()).then((data => {
+        navigate("/threads/"+tid);
+      }))
+    }
   }
+
 
   return (
     <div>
         <Navbar />
         <h2 id="threadtitle">Title!</h2>
+        <a id="authorlink" href="">
+          <h3 id="authorname">Author</h3>
+        </a>
+        <hr/>
+        <h2>Replies:</h2>
         <ul>
-        {replies.map((thread) => (
-          <div className='thread__item' key={thread.id}>
-            <h3>{thread.title}</h3>
-            <a id={"ULINK"+thread.id}>
-              <h5 id={"USER"+thread.id}>"Created by user '{getUserName(thread.id, thread.userID)}'</h5>
+        {replies.map((reply) => (
+          <div className='thread__item' key={reply.replyID}>
+            <h3>{reply.body}</h3>
+            <a class="replyDisp" id={"ULINK"+reply.replyID} style={{display: "flex;"}}>
+              <img id={"USER"+reply.replyID+"IMG"} src=""></img>
+              <h5 id={"USER"+reply.replyID}>"Reply from '{getUserName(reply.replyID, reply.uid, "USER"+reply.replyID, "ULINK"+reply.replyID )}'</h5>
             </a>
             <div className='react__container'>
               {/* Add content for the 'react__container' here */}
@@ -90,6 +104,8 @@ function Thread() {
           </div>
         ))}
         </ul>
+
+        <button onClick={replyThread}>Reply</button>
       
     </div>
   );

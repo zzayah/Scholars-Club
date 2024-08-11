@@ -65,6 +65,10 @@ export default function Create(){
 
                     <label><br></br></label>
 
+                    <label>
+                        No account? <a href="/create">Create one.</a>
+                    </label>
+
                     <button type="submit">Login</button>
                     </form>
                 </div>

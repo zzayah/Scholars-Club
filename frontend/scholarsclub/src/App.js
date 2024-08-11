@@ -33,6 +33,7 @@ function App() {
         console.log(data.userName);
         document.getElementById("USER"+tid).innerHTML = "Created by " + data.userName;
         document.getElementById("ULINK"+tid).href = "http://localhost:3000/account/"+data.userName;
+        document.getElementById("TLINK"+tid).href = "http://localhost:3000/threads/"+tid;
         return data.userName;
     }));
   }
@@ -49,6 +50,10 @@ function App() {
       console.log(res);
       const data = await res.json();
       setThreads(data);
+    }
+
+    if(!localStorage.getItem("_id")){
+      navigate("/login");
     }
 
     fetchThreads();
@@ -81,7 +86,9 @@ function App() {
         <ul>
         {threads.map((thread) => (
           <div className='thread__item' key={thread.id}>
-            <h3>{thread.title}</h3>
+            <a id={"TLINK"+thread.id} href="">
+              <h3>{thread.title}</h3>
+            </a>
             <a id={"ULINK"+thread.id}>
               <h5 id={"USER"+thread.id}>"Created by user '{getUserName(thread.id, thread.userID)}'</h5>
             </a>
