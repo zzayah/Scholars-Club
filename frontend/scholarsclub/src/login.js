@@ -10,6 +10,12 @@ export default function Create(){
 
     const navigate = useNavigate();
 
+    if(localStorage.getItem("_id")){
+        alert("You are already logged in!");
+        
+        navigate("/");
+    }
+
 
     function switchText(){
         

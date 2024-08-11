@@ -223,4 +223,5 @@ app.post('/thread/reply', (req, res) => {
         uid: uid,
         replyID: replyID
     });
+    return res.json();
 });

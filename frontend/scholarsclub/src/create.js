@@ -16,6 +16,11 @@ export default function Create(){
         
     }
 
+    if(localStorage.getItem("_id")){
+        //alert("You are already logged in!");
+        navigate("/");
+    }
+
     function handleLogin(e){
         e.preventDefault();
         const form = e.target;

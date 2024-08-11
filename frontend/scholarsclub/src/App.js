@@ -72,7 +72,7 @@ function App() {
           userID: localStorage.getItem("_id")
         })
       }).then((res) => res.json()).then((data => {
-        navigate("/");
+        window.location.reload();
       }))
     }
   }

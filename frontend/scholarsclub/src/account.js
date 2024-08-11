@@ -59,12 +59,16 @@ function Account() {
   return (
     <div>
       <Navbar />
-      <img id="pfp" src=""></img>
-      <h1 id="username">USERNAME HERE!!!</h1>
-      <h3 id="bio">BIO HERE!!!</h3>
-      <div id="accountedit">
-        If you see this text, it means you are logged into this account!
-        We'll add account editing stuff here later
+      <div class="user">
+        <div class="pfpuser">
+            <img id="pfp" src=""></img>
+            <h1 id="username">USERNAME HERE!!!</h1>
+        </div>
+        <h3 id="bio">BIO HERE!!!</h3>
+        <div id="accountedit">
+            If you see this text, it means you are logged into this account!
+            We'll add account editing stuff here later
+        </div>
       </div>
     </div>
     );

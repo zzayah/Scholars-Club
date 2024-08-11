@@ -73,10 +73,12 @@ function Thread() {
           text: body,
           userID: localStorage.getItem("_id")
         })
-      }).then((res) => res.json()).then((data => {
-        navigate("/threads/"+tid);
-      }))
+      }).then((res) => {
+          console.log("hey");
+          window.location.reload();
+      });
     }
+   
   }
 
 
