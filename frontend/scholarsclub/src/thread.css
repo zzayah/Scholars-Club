@@ -1,5 +1,7 @@
 .replyDisp{
     display: flex;
+    align-items: center;
+    border: 10px;
 }
 .replyDisp img{
     width: 50px;

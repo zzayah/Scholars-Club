@@ -52,14 +52,14 @@ app.post('/acc/login', (req, res) => {
             bcrypt
             .compare(req.body.password, hash)
             .then(val => {
-                console.log(val);
+                //console.log(val);
                 if(val === true){
-                    console.log("yay!")
+                    //console.log("yay!")
                     return res.json({
                         id: result.id,
                     });
                 }else{
-                    console.log("nah way bro");
+                    //console.log("nah way bro");
                     return res.json({
                         error_message: "Wrong info!",
                     });
@@ -69,7 +69,7 @@ app.post('/acc/login', (req, res) => {
             })
             .catch(err => console.error(err.message))      
         }else{
-            console.log("Found data but no hash...");
+            //console.log("Found data but no hash...");
             res.sendStatus(401);
             return;
         }
@@ -80,7 +80,7 @@ app.post('/acc/login', (req, res) => {
     Handle account creation
 */
 app.post('/acc/create', (req, res) => {
-    console.log("Account creation request recieved.");
+    //console.log("Account creation request recieved.");
     var username = req.body.username;
     var password = req.body.password;
     var bio = req.body.bio;
@@ -90,13 +90,13 @@ app.post('/acc/create', (req, res) => {
     // Generate user ID
     let userid = '';
     for(i=0; i<19; ++i) userid += Math.floor(Math.random() * 10);
-    console.log(userid);
+    //console.log(userid);
 
     var tmp;
     dbMan.getUser(username).then(res => {
         tmp = res;
         if(tmp){
-            console.log("User exists");
+            //console.log("User exists");
             // return res.json({
             //     status: 401,
             //     error_message: "Username already exists",
@@ -111,11 +111,11 @@ app.post('/acc/create', (req, res) => {
     bcrypt
         .genSalt(saltRounds)
         .then(salt => {
-            console.log('Salt: ', salt)
+            //console.log('Salt: ', salt)
             return bcrypt.hash(password, salt)
         })
         .then(hash => {
-            console.log('Hash: ', hash)
+            //console.log('Hash: ', hash)
             var user = {
                 userName: username,
                 hash: hash,
@@ -146,7 +146,7 @@ app.post('/acc/create', (req, res) => {
 */
 app.post('/acc/iddata', (req, res) => {
     dbMan.getById(req.body.id).then((data) => {
-        console.log(data);
+        //console.log(data);
         return res.json(data);
     })
     
@@ -154,7 +154,7 @@ app.post('/acc/iddata', (req, res) => {
 
 app.post('/acc/undata', (req, res) => {
     dbMan.getUser(req.body.username).then((data) => {
-        console.log(data);
+        //console.log(data);
         return res.json(data);
     })
     
@@ -169,7 +169,7 @@ app.post('/thread/create', (req, res) => {
     const userID = req.body.userID;
     let threadID = '';
     for(i=0; i<19; ++i) threadID += Math.floor(Math.random() * 10);
-    console.log(threadID);
+    //console.log(threadID);
 
     dbMan.createThread({
         id: threadID,
@@ -192,32 +192,32 @@ app.post('/thread/get', (req, res) => {
 });
 
 app.post('/thread/getthreads', (req, res) => {
-    console.log("req!");
+    //console.log("req!");
     dbMan.getThreads().then((data) => {
         return res.json(data);
     });
-    // console.log(dbMan.getThreads());
+    // //console.log(dbMan.getThreads());
     // return res.json(dbMan.getThreads());
 });
 
 app.post('/thread/getreplies', (req, res) => {
-    console.log("req!");
+    //console.log("req!");
     dbMan.getThreadByID(req.body.id).then((data) => {
         return res.json(data);
     });
-    // console.log(dbMan.getThreads());
+    // //console.log(dbMan.getThreads());
     // return res.json(dbMan.getThreads());
 });
 
 
 app.post('/thread/reply', (req, res) => {
-    console.log("Reply!");
+    //console.log("Reply!");
     const tid = req.body.tid;
     const body = req.body.text;
     const uid  = req.body.userID;
     let replyID = '';
     for(i=0; i<19; ++i) replyID += Math.floor(Math.random() * 10);
-    console.log(replyID);
+    //console.log(replyID);
     dbMan.addReplyToThread(tid, {
         body: body,
         uid: uid,

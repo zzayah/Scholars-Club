@@ -22,7 +22,7 @@ function App() {
   }
 
   function getUserName(tid, id){
-    console.log(id);
+    //console.log(id);
     fetch("http://localhost:8080/acc/iddata", {
         headers: {
             "Content-Type": "application/json",
@@ -30,7 +30,7 @@ function App() {
         method: "POST",
         body: JSON.stringify({id: id})
     }).then((res) => res.json()).then((data => {
-        console.log(data.userName);
+        //console.log(data.userName);
         document.getElementById("USER"+tid).innerHTML = "Created by " + data.userName;
         document.getElementById("ULINK"+tid).href = "http://localhost:3000/account/"+data.userName;
         document.getElementById("TLINK"+tid).href = "http://localhost:3000/threads/"+tid;
@@ -47,7 +47,7 @@ function App() {
         },
         method: "POST"
       });
-      console.log(res);
+      //console.log(res);
       const data = await res.json();
       setThreads(data);
     }

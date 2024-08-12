@@ -5,6 +5,7 @@ import Navbar from "./navbar"; // Update the import statement
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect } from 'react';
 import { Form, useLoaderData } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export async function loader({params}){
     const userName = (params.username);
@@ -13,8 +14,10 @@ export async function loader({params}){
 
 function Account() {
 
+    const navigate = useNavigate();
+
     const userName = useLoaderData();
-    console.log(userName);
+    //console.log(userName);
 
     useEffect(() => {
         if(!userName){
@@ -28,7 +31,13 @@ function Account() {
                     method: "POST",
                     body: JSON.stringify({id: localStorage.getItem("_id")})
                 }).then((res) => res.json()).then((data => {
-                    console.log(data);
+                    // //console.log("wat");
+                    // if(!data){
+                    //     //console.log("hiii!");
+                    //     navigate("/404");
+                    //     return;
+                    // }
+                    //console.log(data);
                     document.getElementById("username").innerHTML = data.userName;      
                     document.getElementById("bio").innerHTML = data.bio;      
                     document.getElementById("pfp").src = data.pfp;  
@@ -42,15 +51,15 @@ function Account() {
                 method: "POST",
                 body: JSON.stringify({username: userName})
             }).then((res) => res.json()).then((data => {
-                console.log(data);
+                //console.log(data);
                 document.getElementById("username").innerHTML = data.userName;      
                 document.getElementById("bio").innerHTML = data.bio;      
                 document.getElementById("pfp").src = data.pfp;
                 
                 if(data.id === localStorage.getItem("_id")){
                     document.getElementById("accountedit").style.display = "flex";
-                    console.log(data.id);
-                    console.log(localStorage.getItem("_id"));
+                    //console.log(data.id);
+                    //console.log(localStorage.getItem("_id"));
                 }
                 
             }));

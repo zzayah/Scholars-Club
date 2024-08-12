@@ -22,7 +22,7 @@ var threads;
     Init database connection
 */
 exports.dbInit = function () {
-    console.log("[DBMAN] Initilizing MongoDB connection...");
+    //console.log("[DBMAN] Initilizing MongoDB connection...");
     try{
         client.connect();
         client.db("admin").command({ ping: 1 });
@@ -30,7 +30,7 @@ exports.dbInit = function () {
         threads = client.db("threads").collection("threads");
         console.log("[DBMAN] Database connection initilized.")
     // } catch {
-    //     console.log("[DBMAN] Error connecting to MongoDB");
+    //     //console.log("[DBMAN] Error connecting to MongoDB");
     // }
     } finally {
         

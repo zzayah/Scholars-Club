@@ -20,7 +20,7 @@ function Thread() {
   const tid = useLoaderData();
 
   function getUserName(tid, id, updateOne, updateTwo){
-    console.log(id);
+    //console.log(id);
     fetch("http://localhost:8080/acc/iddata", {
         headers: {
             "Content-Type": "application/json",
@@ -28,7 +28,7 @@ function Thread() {
         method: "POST",
         body: JSON.stringify({id: id})
     }).then((res) => res.json()).then((data => {
-        console.log(data.userName);
+        //console.log(data.userName);
         document.getElementById(updateOne).innerHTML = "From " + data.userName;
         document.getElementById(updateTwo).href = "http://localhost:3000/account/"+data.userName;
         let img = document.getElementById(updateOne+"IMG");
@@ -49,9 +49,9 @@ function Thread() {
         method: "POST",
         body: JSON.stringify({id: tid})
       });
-      console.log(res);
+      ////console.log(res);
       const data = await res.json();
-      console.log(data);
+      ////console.log(data);
       getUserName(tid, data.userID, "authorname", "authorlink");
       document.getElementById("threadtitle").innerHTML = data.title;
       setReplies(data.replies);
@@ -74,7 +74,7 @@ function Thread() {
           userID: localStorage.getItem("_id")
         })
       }).then((res) => {
-          console.log("hey");
+          //console.log("hey");
           window.location.reload();
       });
     }
