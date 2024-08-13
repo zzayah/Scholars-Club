@@ -53,6 +53,12 @@ root.render(
   </React.StrictMode>
 );
 
+console.log("SCHOLARS CLUB");
+console.log("Unless you know what you're doing, don't go poking around in here.");
+console.log("Unsavory cybercrimnals or friends who like pranks could gain access to your account")
+console.log("with your account token/ID. Be careful with it.");
+console.log("If you lose access to your account, we can't do s*** about it.");
+console.log("Well, we could, but we probably won't.")
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(//console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
